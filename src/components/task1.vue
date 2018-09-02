@@ -69,7 +69,7 @@
 </style>
 
 <script>
-import Task1Right from "./task1Right";
+import Task1Right from "./task1Right.vue";
 let c34 = true;
 let travesedArray = [];
 let refHalf = {
