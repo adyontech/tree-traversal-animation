@@ -2,18 +2,13 @@
     <v-container>
         <v-layout row>
             <v-flex xs6>
-                <!-- <div class="my-canvas-wrapper" style="background-color:white; width: 100%; height: 200px;">
-                    <canvas ref="my-canvas">
-
-                    </canvas>
-                    <slot></slot>
-                </div> -->
                 <div>
                     <v-layout row wrap>
                         <v-flex xs1 offset-xs5>
                             <div id="id34" ref="ref34" class="blue-ground">34</div>
                         </v-flex>
                     </v-layout>
+                    <v-divider class="my-4"></v-divider>
                     <v-layout row wrap class="mt-2">
                         <v-flex xs1 offset-xs4>
                             <div id="23" ref="ref23" class="blue-ground">23</div>
@@ -22,6 +17,8 @@
                             <div id="92" ref="ref92" class="blue-ground">92</div>
                         </v-flex>
                     </v-layout>
+                    <v-divider class="my-4"></v-divider>
+
                     <v-layout row wrap class="mt-2">
                         <v-flex xs1 offset-xs3>
                             <div id="12" ref="ref12" class="blue-ground">12</div>
@@ -31,6 +28,7 @@
                         </v-flex>
 
                     </v-layout>
+                    <v-divider class="my-4"></v-divider>
                     <v-layout row wrap class="mt-2">
                         <v-flex xs1 offset-xs4>
                             <div id="16" ref="ref16" class="blue-ground">16</div>
@@ -43,7 +41,7 @@
                 <div class="mt-5 ml-5">
                     <v-layout row wrap>
                         <v-flex xs1 class="mt-5 ml-5" v-for="(val, index) in traversedArray" :key="index">
-                            <div style="border:2px solid black">{{val}}</div>
+                            <div style="border:2px solid black" class=" pl-2">{{val}}</div>
                         </v-flex>
                     </v-layout>
                 </div>
@@ -136,26 +134,10 @@ class BinarySearchTree {
     return this.root;
   }
   inorder(node) {
-    // if (!window.contextData) return;
-    // const ctx = window.contextData;
-    // ctx.beginPath();
-    // ctx.arc(75, 75, 20, 0, Math.PI * 2, true); // Outer circle
-    // // ctx.moveTo(100, 105);
-    // ctx.arc(175, 175, 20, 0, Math.PI * 2, true); // Outer circle
-    // // ctx.arc(75, 75, 35, 0, Math.PI, false); // Mouth (clockwise)
-    // // ctx.moveTo(65, 65);
-    // // ctx.arc(60, 65, 5, 0, Math.PI * 2, true); // Left eye
-    // // ctx.moveTo(95, 65);
-    // // ctx.arc(90, 65, 5, 0, Math.PI * 2, true); // Right eye
-    // ctx.stroke();
-    // ctx.clearRect(150, 150, 200, 200);
-    // // Clear the area for the text.
-    // ctx.clearRect(150, 150 - 42, 200, 100);
     if (node !== null) {
       this.inorder(node.left);
-      travesedArray.push(node.data);
-      console.log(travesedArray);
-      console.log(node.data);
+      setTimeout(() => travesedArray.push(node.data), 2000);
+
       this.inorder(node.right);
       // setTimeout(() => this.inorder(node.left), 5000);
       // setTimeout(() => this.blinkStatus(node.data), 3000);
@@ -168,10 +150,8 @@ class BinarySearchTree {
   preorder(node) {
     if (node != null) {
       console.log(node.data);
-
-      this.blinkStatus(node, true);
-      var x = setTimeout(this.blinkStatus(node, false), 300);
-      console.log("45");
+      travesedArray.push(node.data);
+      console.log(travesedArray);
       this.preorder(node.left);
       this.preorder(node.right);
     }
@@ -182,25 +162,22 @@ class BinarySearchTree {
       this.postorder(node.right);
 
       console.log(node.data);
-      this.blinkStatus(node, true);
-      var x = setTimeout(this.blinkStatus(node, false), 2000);
+      travesedArray.push(node.data);
+      // this.blinkStatus(node, true);
+      // var x = setTimeout(this.blinkStatus(node, false), 2000);
     }
   }
   blinkStatus(val) {
     refHalf[val].classList.toggle("toggle-color");
   }
 }
-// const percentWidthToPix = (percent, ctx) =>
-//   Math.floor(ctx.canvas.width / 100 * percent);
-// const percentHeightToPix = (percent, ctx) =>
-//   Math.floor(ctx.canvas.height / 100 * percent);
-
 export default {
   data: function() {
     return {
       BST: Object,
       traveralType: "",
-      context: null
+      context: null,
+      newArray: travesedArray
     };
   },
   components: {
@@ -217,23 +194,15 @@ export default {
     refHalf[4] = this.$refs["ref4"];
     refHalf[16] = this.$refs["ref16"];
     refHalf[9] = this.$refs["ref9"];
-    // this.context = this.$refs["my-canvas"].getContext("2d");
-    // window.contextData = this.context;
-    // console.log(this.context);
-    // this.$refs["my-canvas"].width = this.$refs[
-    //   "my-canvas"
-    // ].parentElement.clientWidth;
-    // this.$refs["my-canvas"].height = this.$refs[
-    //   "my-canvas"
-    // ].parentElement.clientHeight;
-    var root = this.BST.getRootNode();
-    // console.log(root);
-    this.BST.inorder(root);
+    // var root = this.BST.getRootNode();
+    // // console.log(root);
+    // this.BST.inorder(root);
   },
 
   computed: {
     traversedArray() {
-      console.log("sdasd");
+      this.newArray = this.newArray;
+      // console.log(this.newArray);
       return travesedArray;
     }
   },
@@ -241,9 +210,9 @@ export default {
   created() {
     this.BST = new BinarySearchTree();
     this.BST.insert();
-    // [34, 23, 92, 12, 4, 16, 9].forEach(el => this.BST.insert(el));
 
-    console.log(this.BST);
+    // earlier BST implementation
+    // [34, 23, 92, 12, 4, 16, 9].forEach(el => this.BST.insert(el));
   },
   methods: {
     setTreeTraversal(val) {
@@ -252,13 +221,19 @@ export default {
       this.traveralType = val;
       switch (val) {
         case "Inorder":
+          travesedArray = [];
+          this.newArray = [];
           this.BST.inorder(root);
           break;
         case "Preorder":
-          this.preorder();
+          travesedArray = [];
+          this.newArray = [];
+          this.BST.preorder(root);
           break;
         case "Postorder":
-          this.postorder();
+          travesedArray = [];
+          this.newArray = [];
+          this.BST.postorder(root);
           break;
       }
     }
