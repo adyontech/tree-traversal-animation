@@ -1,57 +1,57 @@
 <template>
-    <v-container>
-        <v-layout row>
-            <v-flex xs6>
-                <div>
-                    <v-layout row wrap>
-                        <v-flex xs1 offset-xs5>
-                            <div id="id34" ref="ref34" class="blue-ground">34</div>
-                        </v-flex>
-                    </v-layout>
-                    <v-divider class="my-4"></v-divider>
-                    <v-layout row wrap class="mt-2">
-                        <v-flex xs1 offset-xs4>
-                            <div id="23" ref="ref23" class="blue-ground">23</div>
-                        </v-flex>
-                        <v-flex xs1 offset-xs1>
-                            <div id="92" ref="ref92" class="blue-ground">92</div>
-                        </v-flex>
-                    </v-layout>
-                    <v-divider class="my-4"></v-divider>
+  <v-container>
+    <v-layout row>
+      <v-flex xs6>
+        <div class="px-5">
+          <v-layout row wrap>
+            <v-flex xs1 offset-xs5>
+              <div id="id34" ref="ref34" class="blue-ground">34</div>
+            </v-flex>
+          </v-layout>
+          <v-divider class="my-4"></v-divider>
+          <v-layout row wrap class="mt-2">
+            <v-flex xs1 offset-xs4>
+              <div id="23" ref="ref23" class="blue-ground">23</div>
+            </v-flex>
+            <v-flex xs1 offset-xs1>
+              <div id="92" ref="ref92" class="blue-ground">92</div>
+            </v-flex>
+          </v-layout>
+          <v-divider class="my-4"></v-divider>
 
-                    <v-layout row wrap class="mt-2">
-                        <v-flex xs1 offset-xs3>
-                            <div id="12" ref="ref12" class="blue-ground">12</div>
-                        </v-flex>
-                        <v-flex xs1 offset-xs1>
-                            <div id="04" ref="ref4" class="blue-ground">04</div>
-                        </v-flex>
-
-                    </v-layout>
-                    <v-divider class="my-4"></v-divider>
-                    <v-layout row wrap class="mt-2">
-                        <v-flex xs1 offset-xs4>
-                            <div id="16" ref="ref16" class="blue-ground">16</div>
-                        </v-flex>
-                        <v-flex xs1 offset-xs1>
-                            <div id="09" ref="ref9" class="blue-ground">09</div>
-                        </v-flex>
-                    </v-layout>
-                </div>
-                <div class="mt-5 ml-5">
-                    <v-layout row wrap>
-                        <v-flex xs1 class="mt-5 ml-5" v-for="(val, index) in traversedArray" :key="index">
-                            <div style="border:2px solid black" class=" pl-2">{{val}}</div>
-                        </v-flex>
-                    </v-layout>
-                </div>
+          <v-layout row wrap class="mt-2">
+            <v-flex xs1 offset-xs3>
+              <div id="12" ref="ref12" class="blue-ground">12</div>
+            </v-flex>
+            <v-flex xs1 offset-xs1>
+              <div id="04" ref="ref4" class="blue-ground">04</div>
             </v-flex>
 
-            <v-flex xs6>
-                <Task1Right v-on:dropdownVal="setTreeTraversal($event)" />
+          </v-layout>
+          <v-divider class="my-4"></v-divider>
+          <v-layout row wrap class="mt-2">
+            <v-flex xs1 offset-xs4>
+              <div id="16" ref="ref16" class="blue-ground">16</div>
             </v-flex>
-        </v-layout>
-    </v-container>
+            <v-flex xs1 offset-xs1>
+              <div id="09" ref="ref9" class="blue-ground">09</div>
+            </v-flex>
+          </v-layout>
+        </div>
+        <div class="mt-2 ml-5">
+          <v-layout row wrap>
+            <v-flex xs1 class="mt-5 ml-5" v-for="(val, index) in traversedArray" :key="index">
+              <div style="border:2px solid black" class=" pl-2">{{val}}</div>
+            </v-flex>
+          </v-layout>
+        </div>
+      </v-flex>
+
+      <v-flex xs6>
+        <Task1Right v-on:dropdownVal="setTreeTraversal($event)" />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 <style>
 .blue-ground {
@@ -104,39 +104,16 @@ class BinarySearchTree {
     this.root.left.right.left = new Node(16);
     this.root.left.right.right = new Node(9);
     this.root.right = new Node(92);
-    console.log(this.root);
-
-    // earlier BST implementation
-
-    // if (this.root === null) this.root = newNode;
-    // else {
-    //   this.insertNode(this.root, newNode);
-    // }
+    // console.log(this.root)
   }
 
-  // earlier BST implementation
-
-  // insertNode(node, newNode) {
-  //   // earlier implemented as BST
-  //   if (newNode.data < node.data) {
-  //     if (node.left === null) node.left = newNode;
-  //     else {
-  //       this.insertNode(node.left, newNode);
-  //     }
-  //   } else {
-  //     if (node.right === null) node.right = newNode;
-  //     else {
-  //       this.insertNode(node.right, newNode);
-  //     }
-  //   }
-  // }
   getRootNode() {
     return this.root;
   }
   inorder(node) {
     if (node !== null) {
       this.inorder(node.left);
-      setTimeout(() => travesedArray.push(node.data), 2000);
+      travesedArray.push(node.data);
 
       this.inorder(node.right);
       // setTimeout(() => this.inorder(node.left), 5000);
@@ -149,9 +126,7 @@ class BinarySearchTree {
   }
   preorder(node) {
     if (node != null) {
-      console.log(node.data);
       travesedArray.push(node.data);
-      console.log(travesedArray);
       this.preorder(node.left);
       this.preorder(node.right);
     }
@@ -163,8 +138,6 @@ class BinarySearchTree {
 
       console.log(node.data);
       travesedArray.push(node.data);
-      // this.blinkStatus(node, true);
-      // var x = setTimeout(this.blinkStatus(node, false), 2000);
     }
   }
   blinkStatus(val) {
@@ -176,14 +149,11 @@ export default {
     return {
       BST: Object,
       traveralType: "",
-      context: null,
       newArray: travesedArray
     };
   },
   components: {
     Task1Right
-    // MyCanvas,
-    // MyBox
   },
 
   mounted() {
@@ -194,15 +164,11 @@ export default {
     refHalf[4] = this.$refs["ref4"];
     refHalf[16] = this.$refs["ref16"];
     refHalf[9] = this.$refs["ref9"];
-    // var root = this.BST.getRootNode();
-    // // console.log(root);
-    // this.BST.inorder(root);
   },
 
   computed: {
     traversedArray() {
       this.newArray = this.newArray;
-      // console.log(this.newArray);
       return travesedArray;
     }
   },
@@ -210,9 +176,6 @@ export default {
   created() {
     this.BST = new BinarySearchTree();
     this.BST.insert();
-
-    // earlier BST implementation
-    // [34, 23, 92, 12, 4, 16, 9].forEach(el => this.BST.insert(el));
   },
   methods: {
     setTreeTraversal(val) {
