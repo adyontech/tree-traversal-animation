@@ -70,7 +70,6 @@
 
 <script>
 import Task1Right from "./task1Right.vue";
-let c34 = true;
 let travesedArray = [];
 let refHalf = {
   34: "",
@@ -83,11 +82,9 @@ let refHalf = {
 };
 class Node {
   constructor(data) {
-    this.depth;
     this.data = data;
     this.left = null;
     this.right = null;
-    this.visible = false;
   }
 }
 
@@ -141,6 +138,7 @@ class BinarySearchTree {
     }
   }
   blinkStatus(val) {
+    // using refrece to edit the class
     refHalf[val].classList.toggle("toggle-color");
   }
 }
@@ -157,6 +155,7 @@ export default {
   },
 
   mounted() {
+    // making global variable to allow using ref outside of vue
     refHalf[34] = this.$refs["ref34"];
     refHalf[23] = this.$refs["ref23"];
     refHalf[92] = this.$refs["ref92"];
@@ -167,6 +166,7 @@ export default {
   },
 
   computed: {
+    // a watcher on traversedArray
     traversedArray() {
       this.newArray = this.newArray;
       return travesedArray;
@@ -174,10 +174,12 @@ export default {
   },
 
   created() {
+    // creating the tree, (it isn't binary)
     this.BST = new BinarySearchTree();
     this.BST.insert();
   },
   methods: {
+    // event from child
     setTreeTraversal(val) {
       var root = this.BST.getRootNode();
 

@@ -4,8 +4,7 @@
             <v-flex xs8>
                 <div v-if="!showEnterField">
                     <div class="caption">Enter how many input you have.</div>
-                    <v-text-field @change="showField" color="grey darken-1" v-model="howMany" mask="##" outline single-line label="Enter total input"></v-text-field>
-
+                    <v-text-field color="grey darken-1" v-model="howMany" mask="##" outline single-line label="Enter total input"></v-text-field>
                 </div>
                 <div v-if="showEnterField && howMany !== 0">
                     <div class="caption">Press enter when done.</div>
@@ -30,6 +29,8 @@
                     </v-layout>
                 </div>
                 <v-btn color="primary" v-on:click="reset">Reset </v-btn>
+                <v-btn color="primary" v-on:click="showField"> Start</v-btn>
+
             </v-flex>
         </v-layout>
     </v-container>
@@ -53,6 +54,7 @@ export default {
     },
 
     showField: function() {
+      if (this.howMany === "") return;
       this.showEnterField = true;
       this.inputVal = "";
       this.allEnteredVal = [];
